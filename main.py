@@ -10,7 +10,6 @@ chrome_options = Options()
 chrome_options.add_argument("--window-size=1920,1080")
 driver = webdriver.Chrome(options=chrome_options)
 
-# 구글 뉴스 페이지 열기
 driver.get('https://www.acmicpc.net/login?next=%2F')
 driver.find_element(By.NAME, 'login_user_id').send_keys(AccountData.ID)
 element = driver.find_element(By.NAME, 'login_password')
