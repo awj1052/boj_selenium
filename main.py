@@ -1,9 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-import FileService, WebService
+import FileService, WebService, FilterService
 
 if __name__ == "__main__":
+
+    try:
+        target = int(input("Enter the problem number : "))
+    except:
+        print("Enter the problem number.")
+        exit()
     
     last_solution = FileService.get_last_solution()
 
@@ -13,6 +19,6 @@ if __name__ == "__main__":
 
     WebService.init(driver)
     solved_data = WebService.get_recent_solved_problem(driver, last_solution)
-    print(len(solved_data))
+    filtered_data = FilterService.filtering_problem_number(solved_data, target)
 
     driver.close()

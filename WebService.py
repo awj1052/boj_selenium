@@ -31,6 +31,7 @@ def get_recent_solved_problem(driver, last_solution):
             solution_number = body[0].text
             user_name = body[1].find_element(By.TAG_NAME, 'a').text
             problem_number = body[2].find_element(By.CLASS_NAME, 'problem_title').text
+            result = body[3].find_element(By.CLASS_NAME, 'result-text').text
 
             if first_solution_number == 0:
                 first_solution_number = int(solution_number)
@@ -39,6 +40,6 @@ def get_recent_solved_problem(driver, last_solution):
                 FileService.update_last_solution(first_solution_number)
                 return solved_data
             
-            solved_data.append(SolvedData.SolvedData(solution_number, user_name, problem_number))
+            solved_data.append(SolvedData.SolvedData(solution_number, user_name, problem_number, result))
         driver.find_element(By.ID, 'next_page').click()
         time.sleep(1)
