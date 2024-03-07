@@ -7,5 +7,4 @@ class SolvedData:
         self.result = result
 
     def is_correct(self):
-        print(self.result, self.result == "맞았습니다!!")
         return True if self.result == "맞았습니다!!" else False

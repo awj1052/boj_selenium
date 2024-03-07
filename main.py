@@ -20,5 +20,7 @@ if __name__ == "__main__":
     WebService.init(driver)
     solved_data = WebService.get_recent_solved_problem(driver, last_solution)
     filtered_data = FilterService.filtering_problem_number(solved_data, target)
-
+    usernames = FilterService.get_usernames(filtered_data)
+    print(*usernames)
+    
     driver.close()
