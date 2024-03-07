@@ -20,3 +20,18 @@ button = driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/div[
 driver.find_element(By.XPATH, '//*[@id="ranklist"]/tbody/tr/td[1]/a').click() # 첫 번째 그룹
 time.sleep(1)
 driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div/div[2]/ul/li[3]/a').click() # 채점 현황
+
+table = driver.find_element(By.ID, 'status-table')
+tbody = table.find_element(By.TAG_NAME, 'tbody')
+rows = tbody.find_elements(By.TAG_NAME, 'tr')
+cnt = 0
+for index, value in enumerate(rows):
+    cnt += 1
+    body=value.find_elements(By.TAG_NAME, 'td')
+    solution_number = body[0].text
+    user_name = body[1].find_element(By.TAG_NAME, 'a').text
+    problem_number = body[2].find_element(By.CLASS_NAME, 'problem_title').text
+    print(solution_number, user_name, problem_number)
+print("DATA SIZE", cnt)
+
+driver.close()
