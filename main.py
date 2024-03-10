@@ -15,14 +15,17 @@ if __name__ == "__main__":
 
     chrome_options = Options()
     chrome_options.add_argument("--window-size=1920,1080")
-    driver = webdriver.Chrome(options=chrome_options)
+    chrome_options.add_argument("--headless")
+    chrome_service = webdriver.ChromeService('/usr/lib/chromium-browser/chromedriver')
+    driver = webdriver.Chrome(options=chrome_options, service=chrome_service)
 
     WebService.init(driver)
     solved_data = WebService.get_recent_solved_problem(driver, last_solution)
     filtered_data = FilterService.filtering_problem_number(solved_data, target)
     usernames = FilterService.get_usernames(filtered_data)
+    print(*usernames)
     
-    names = FileService.get_name(usernames)
-    print(*names)
+    #names = FileService.get_name(usernames)
+    #print(*names)
 
     driver.close()
