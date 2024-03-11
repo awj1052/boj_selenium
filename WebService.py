@@ -6,7 +6,7 @@ import SolvedData, FileService
 
 import AccountData
 
-def init(driver):
+def init(driver, problem_id):
     driver.get('https://www.acmicpc.net/login?next=%2F')
     driver.find_element(By.NAME, 'login_user_id').send_keys(AccountData.ID)
     element = driver.find_element(By.NAME, 'login_password')
@@ -18,6 +18,9 @@ def init(driver):
     driver.find_element(By.XPATH, '//*[@id="ranklist"]/tbody/tr/td[1]/a').click() # 첫 번째 그룹
     time.sleep(1)
     driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div/div[2]/ul/li[3]/a').click() # 채점 현황
+    problem_input = driver.find_element(By.NAME, 'problem_id')
+    problem_input.send_keys(str(problem_id))
+    problem_input.send_keys(Keys.Enter)
 
 def get_recent_solved_problem(driver, last_solution):
     first_solution_number = 0
