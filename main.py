@@ -1,6 +1,3 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
 import FileService, WebService, FilterService
 
 if __name__ == "__main__":
@@ -13,11 +10,7 @@ if __name__ == "__main__":
     
     last_solution = FileService.get_last_solution()
 
-    chrome_options = Options()
-    chrome_options.add_argument("--window-size=1920,1080")
-    chrome_options.add_argument("--headless")
-    chrome_service = webdriver.ChromeService('/usr/lib/chromium-browser/chromedriver')
-    driver = webdriver.Chrome(options=chrome_options, service=chrome_service)
+    driver = WebService.get_driver()
 
     print("Starting the WebService..")
     WebService.init(driver, target)

@@ -1,10 +1,20 @@
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 import time
 
 import SolvedData, FileService
 
 import AccountData
+
+def get_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--headless")
+    chrome_service = webdriver.ChromeService('/usr/lib/chromium-browser/chromedriver')
+    driver = webdriver.Chrome(options=chrome_options, service=chrome_service)
+    return driver
 
 def init(driver, problem_id):
     driver.get('https://www.acmicpc.net/login?next=%2F')
@@ -20,7 +30,7 @@ def init(driver, problem_id):
     driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div/div[2]/ul/li[3]/a').click() # 채점 현황
     problem_input = driver.find_element(By.NAME, 'problem_id')
     problem_input.send_keys(str(problem_id))
-    problem_input.send_keys(Keys.Enter)
+    problem_input.send_keys(Keys.ENTER)
 
 def get_recent_solved_problem(driver, last_solution):
     first_solution_number = 0
